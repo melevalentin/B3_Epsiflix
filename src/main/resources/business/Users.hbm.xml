@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="business.Users" table="users" schema="epsiflix">
+        <id name="id">
+            <column name="ID" sql-type="int(11)"/>
+            <generator class="identity"/>
+        </id>
+        <property name="firstName">
+            <column name="FIRST_NAME" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="lastName">
+            <column name="LAST_NAME" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="email">
+            <column name="EMAIL" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="address">
+            <column name="ADDRESS" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="phone">
+            <column name="PHONE" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="password">
+            <column name="PASSWORD" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="ccInfos">
+            <column name="CC_INFOS" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="isAdmin">
+            <column name="IS_ADMIN" sql-type="tinyint(1)"/>
+        </property>
+        <many-to-one name="subscriptionByIdSubscription" class="business.Subscription">
+            <column name="ID_SUBSCRIPTION"/>
+        </many-to-one>
+        <set name="favorisesById" inverse="true">
+            <key>
+                <column name="ID_USER"/>
+            </key>
+            <one-to-many not-found="ignore" class="business.Favoris"/>
+        </set>
+    </class>
+</hibernate-mapping>

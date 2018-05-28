@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="business.Media" table="media" schema="epsiflix">
+        <id name="id">
+            <column name="ID" sql-type="int(11)"/>
+            <generator class="identity"/>
+        </id>
+        <property name="title">
+            <column name="TITLE" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="subtitle">
+            <column name="SUBTITLE" sql-type="varchar(200)" length="200"/>
+        </property>
+        <property name="description">
+            <column name="DESCRIPTION" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="duration">
+            <column name="DURATION" sql-type="int(11)"/>
+        </property>
+        <property name="producer">
+            <column name="PRODUCER" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="productionCountry">
+            <column name="PRODUCTION_COUNTRY" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="productionCompany">
+            <column name="PRODUCTION_COMPANY" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="year">
+            <column name="YEAR" sql-type="int(11)"/>
+        </property>
+        <property name="imgCover">
+            <column name="IMG_COVER" sql-type="varchar(200)" length="200"/>
+        </property>
+        <many-to-one name="typeByIdType" class="business.Type">
+            <column name="ID_TYPE"/>
+        </many-to-one>
+        <set name="episodesById" inverse="true">
+            <key>
+                <column name="ID_MEDIA"/>
+            </key>
+            <one-to-many not-found="ignore" class="business.Episode"/>
+        </set>
+        <set name="favorisesById" inverse="true">
+            <key>
+                <column name="ID_MEDIA"/>
+            </key>
+            <one-to-many not-found="ignore" class="business.Favoris"/>
+        </set>
+        <set name="filmsById" inverse="true">
+            <key>
+                <column name="ID_MEDIA"/>
+            </key>
+            <one-to-many not-found="ignore" class="business.Film"/>
+        </set>
+        <set name="seriesById" inverse="true">
+            <key>
+                <column name="ID_MEDIA"/>
+            </key>
+            <one-to-many not-found="ignore" class="business.Serie"/>
+        </set>
+    </class>
+</hibernate-mapping>

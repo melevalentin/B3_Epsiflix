@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="business.Episode" table="episode" schema="epsiflix">
+        <id name="id">
+            <column name="ID" sql-type="int(11)"/>
+            <generator class="identity"/>
+        </id>
+        <property name="title">
+            <column name="TITLE" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="description">
+            <column name="DESCRIPTION" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="duration">
+            <column name="DURATION" sql-type="int(11)"/>
+        </property>
+        <property name="url">
+            <column name="URL" sql-type="varchar(200)" length="200"/>
+        </property>
+        <many-to-one name="mediaByIdMedia" class="business.Media">
+            <column name="ID_MEDIA"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
